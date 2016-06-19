@@ -1,17 +1,15 @@
 defmodule SlackBridge.GroupMeWebhookController do
   use SlackBridge.Web, :controller
 
-  alias SlackBridge.GroupMeWebhook
+  alias SlackBridge.Webhook
 
-  plug :scrub_params, "group_me_webhook" when action in [:create]
-
-  def create(conn, %{"group_me_webhook" => group_me_webhook_params}) do
-    changeset = GroupMeWebhook.changeset(%GroupMeWebhook{}, group_me_webhook_params)
+  def create(conn, params) do
+    changeset = Webhook.changeset(%Webhook{}, %{content: params, type: "groupme"})
 
     case Repo.insert(changeset) do
-      {:ok, group_me_webhook} ->
+      {:ok, _} ->
         conn |> put_status(:created) |> json("")
-      {:error, changeset} ->
+      {:error, _} ->
         conn |> put_status(:unprocessable_entity) |> json("")
     end
   end
