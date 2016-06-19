@@ -5,7 +5,8 @@ defmodule SlackBridge.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", SlackBridge do
+  scope "/webhooks", SlackBridge do
     pipe_through :api
+    resources "groupme", GroupMeWebhookController, only: [:create]
   end
 end
