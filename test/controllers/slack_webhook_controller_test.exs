@@ -1,4 +1,4 @@
-defmodule SlackBridge.GroupMeWebhookControllerTest do
+defmodule SlackBridge.SlackWebhookControllerTest do
   use SlackBridge.ConnCase
 
   alias SlackBridge.Webhook
@@ -11,8 +11,8 @@ defmodule SlackBridge.GroupMeWebhookControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, group_me_webhook_path(conn, :create), @valid_attrs
+    conn = post conn, slack_webhook_path(conn, :create), @valid_attrs
     assert json_response(conn, 201) == ""
-    assert Repo.one!(Webhook).type == "groupme"
+    assert Repo.one!(Webhook).type == "slack"
   end
 end
