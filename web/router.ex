@@ -3,6 +3,7 @@ defmodule SlackBridge.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug SlackBridge.Plugs.FilterBots
   end
 
   scope "/webhooks", SlackBridge do

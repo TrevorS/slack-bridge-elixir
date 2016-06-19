@@ -29,3 +29,5 @@ config :slack_bridge, SlackBridge.Repo,
   database: "slack_bridge_dev",
   hostname: "localhost",
   pool_size: 10
+
+import_config "dev.secret.exs"
